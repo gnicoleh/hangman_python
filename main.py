@@ -2,7 +2,7 @@
 
 import random
 
-word_bank = ['chocolate', 'Horus Heresy', 'heretic', 'The God Emperor', 'Terraria', 'Siege', 'Beaulo', 'Dark Souls', 'cottoncandy', 'cryptocurrency', 'sparkpoint']
+word_bank = ['chocolate', 'Horus Heresy', 'heretic', 'The God Emperor', 'Terraria', 'Siege', 'Beaulo', 'Dark Souls', 'cottoncandy', 'cryptocurrency', 'sparkpoint', 'PayMoneyWubby', 'SweetAnita']
 
 ## Choosing a random word from a list
 
