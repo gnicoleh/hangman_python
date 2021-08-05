@@ -25,6 +25,7 @@ def word_to_guess(word):
 ## '*' is a pointer. The following line means: print the elements in blanks[] that are separated by ''
 blanks = word_to_guess(word)
 print(*blanks, sep='')
+print(" ")
 
 def start_game (word, blanks):
 	attempts = 6
