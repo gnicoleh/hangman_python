@@ -6,7 +6,7 @@ word_bank = ['chocolate', 'Horus Heresy', 'heretic', 'The God Emperor', 'Terrari
 
 ## Choosing a random word from a list
 def choose_word(word_bank):
-    return str(random.choice(word_bank)) #need to ensure all outputs are strings for comparison
+    return str(random.choice(word_bank)) #needed to ensure all outputs are strings for comparison
 
 #For testing purposes, word chosen is currently printed out, will be removed in the future
 word = choose_word(word_bank)
@@ -43,11 +43,13 @@ def start_game (word, blanks):
 				print("Please enter only one character at a time.")
 				continue
 			if given_letter in word:
+				i = 0 #needed to set the 'start' of the find() method
 				for char in word:
 					if char == given_letter:
-						position_of_letter = word.index(given_letter)
+						position_of_letter = word.find(given_letter, i) #looks if letter appears more than once in the word
+						i = position_of_letter + 1 #starts find() on the next index of the last appearance
 						blanks[position_of_letter] = given_letter
-						print(blanks)
+				print(*blanks, sep='')
 			elif attempts > 2:
 				attempts -= 1
 				print("Oops! Looks like that character is not in the word(s). Try again! You have " + str(attempts) + " attempts remaining.")
