@@ -63,7 +63,12 @@ def start_game (word, blanks):
 				print("Oops! Looks like that character is not in the word(s). You have ran out of attempts, better luck next time!")
 				break
 		else:
-			print("Huzzah! You guessed ' " + blanks + "' right! Thank you for playing, see you next time!")
+			#blanks at this point is a list of characters, so to prevent it being printed as an ugly list, which cannot be concatenated, we iterate through the list,
+			# concatenating each element together individually into a word called merger which is then printed
+			merger = ""
+			for char in blanks:
+				merger += char
+			print("Huzzah! You guessed '" + merger + "' right! Thank you for playing, see you next time!")
 			break
 	return None
 
