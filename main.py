@@ -45,6 +45,10 @@ def start_game ():
 			if len(given_letter) > 1:
 				print("Please enter only one character at a time.")
 				continue
+			#safety check to ensure only letters are accepted. This way, numbers and symbols cannot deduct user attempts at the word
+			if given_letter.isalpha() != True:
+				print("Please only enter a letter of the alphabet.")
+				continue
 			if given_letter in word:
 				i = 0 #needed to set the 'start' of the find() method
 				for char in word:
@@ -94,7 +98,7 @@ def play_again():
 # The music for the game, the full path to the file is pulled with os commands below, and then the backslashes (\) are replaced with forward slashes (/)
 soundfile_path = os.path.dirname(os.path.abspath(__file__)) + '\zeldas_lullaby_piano.wav'
 soundfile = soundfile_path.replace("\\","/")
-winsound.PlaySound(soundfile, winsound.SND_ASYNC + winsound.SND_LOOP) #SND_ASYNC allows other process to run cocurrently once the sound file starts. SND_LOOP will loop the song until the program is closed
+#winsound.PlaySound(soundfile, winsound.SND_ASYNC + winsound.SND_LOOP) #SND_ASYNC allows other process to run cocurrently once the sound file starts. SND_LOOP will loop the song until the program is closed
 #TODO: Try detecting os, if windows, use winsound, if not windows, skip this part of code to prevent runtime errors when not on Windows machine
 
 #main gameplay loop
