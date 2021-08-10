@@ -2,22 +2,22 @@
 
 from tkinter import *
 from tkinter import ttk
+import tkinter.font as font
 
-def calculate(*args):
-    try:
-        value = float(feet.get())
-        meters.set(int(0.3048 * value * 10000.0 + 0.5)/10000.0)
-    except ValueError:
-        pass
+mainWindow = Tk()
+mainWindow.title("Crypto Hangman")
+width = mainWindow.winfo_screenwidth()
+height = mainWindow.winfo_screenheight()
+mainWindow.geometry("%dx%d" % (width, height))
+mainWindow.configure(bg="black")
 
-# Setting up the Main Application Window
-root = Tk()
-root.title("Hangman")
+# define font
+myFont = font.Font(family="Segoe UI", size=30, weight="bold")
 
-# Creating a Content Frame
-mainframe = ttk.Frame(root, padding="3 3 12 12")
-mainframe.grid(column=0, row=0, sticky=(N, W, E, S))
-root.columnconfigure(0, weight=1)
-root.rowconfigure(0, weight=1)
+# add widgets here
+button1 = Button(mainWindow, text="Play", bg="green", fg="white", font=myFont).place(relx=0.5, rely=0.5, anchor=CENTER)
+button2 = Button(mainWindow, text="Settings", bg="green", fg="white", font=myFont).place(relx=0.5, rely=0.6, anchor=CENTER)
+button3 = Button(mainWindow, text="Github Code", bg="green", fg="white", font=myFont).place(relx=0.5, rely=0.7, anchor=CENTER)
+button4 = Button(mainWindow, text="Quit", bg="green", fg="white", font=myFont).place(relx=0.5, rely=0.8, anchor=CENTER)
 
-# Creating the Entry Widget
+mainWindow.mainloop()
