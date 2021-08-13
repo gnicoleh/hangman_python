@@ -30,6 +30,7 @@ def openNewWindow():
 mainWindow = Tk()
 # sets the title of the window widget
 mainWindow.title("Crypto Hangman")
+# set upper-left icon using mainWindow.iconbitmap() || use .ico for windows os and .xbm for linux os
 # set the geometry of the window
 width = mainWindow.winfo_screenwidth()
 height = mainWindow.winfo_screenheight()

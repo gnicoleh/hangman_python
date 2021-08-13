@@ -1,15 +1,15 @@
-## Hangman
+# Hangman
 
 import random, os
-import winsound #the library that enables us to play sound, need to include files or whatever in installer
+import winsound # the library that enables us to play sound, need to include files or whatever in installer
 
 word_bank = ['chocolate', 'Horus Heresy', 'heretic', 'The God Emperor', 'Terraria', 'Siege', 'Beaulo', 'Dark Souls', 'cottoncandy', 'cryptocurrency', 'sparkpoint', 'PayMoneyWubby', 'SweetAnita']
 
-## Choosing a random word from a list
+# Choosing a random word from a list
 def choose_word(word_bank):
     return str(random.choice(word_bank)) #needed to ensure all outputs are strings for comparison
 
-## Creating blank spaces for each character in the chosen word
+# Creating blank spaces for each character in the chosen word
 def word_to_guess(word):
     blank_spaces = []
     for char in word:
@@ -20,18 +20,18 @@ def word_to_guess(word):
     return blank_spaces
 
 
-#main functionality of the game
+# main functionality of the game
 def start_game ():
 
-	#For testing purposes, word chosen is currently printed out, will be removed in the future
+	# For testing purposes, word chosen is currently printed out, will be removed in the future
 	word = choose_word(word_bank)
 	display_word = word
 	print(display_word)
 
-	#we save the word as all lowercase so that it does not matter if player inputs capitals or not
+	# we save the word as all lowercase so that it does not matter if player inputs capitals or not
 	word = word.lower()
 
-	## '*' is a pointer. The following line means: print the elements in blanks[] that are separated by ''
+	# '*' is a pointer. The following line means: print the elements in blanks[] that are separated by ''
 	blanks = word_to_guess(word)
 	print(*blanks, sep='')
 	print(" ")
@@ -40,21 +40,21 @@ def start_game ():
 	while True:
 		if "_" in blanks:
 			given_letter = input("Please enter a character that you think is in the word(s)\n")
-			given_letter = given_letter.lower() #sanitize all inputs to also be lowercase so everything matches
-			#safety check to ensure only 1 character entered at a time
+			given_letter = given_letter.lower() # sanitize all inputs to also be lowercase so everything matches
+			# safety check to ensure only 1 character entered at a time
 			if len(given_letter) > 1:
 				print("Please enter only one character at a time.")
 				continue
-			#safety check to ensure only letters are accepted. This way, numbers and symbols cannot deduct user attempts at the word
+			# safety check to ensure only letters are accepted. This way, numbers and symbols cannot deduct user attempts at the word
 			if given_letter.isalpha() != True:
 				print("Please only enter a letter of the alphabet.")
 				continue
 			if given_letter in word:
-				i = 0 #needed to set the 'start' of the find() method
+				i = 0 # needed to set the 'start' of the find() method
 				for char in word:
 					if char == given_letter:
-						position_of_letter = word.find(given_letter, i) #looks if letter appears more than once in the word
-						i = position_of_letter + 1 #starts find() on the next index of the last appearance
+						position_of_letter = word.find(given_letter, i) # looks if letter appears more than once in the word
+						i = position_of_letter + 1 # starts find() on the next index of the last appearance
 						blanks[position_of_letter] = given_letter
 				print(*blanks, sep='')
 			elif attempts > 2:
@@ -70,7 +70,7 @@ def start_game ():
 				print("Oops! Looks like that character is not in the word(s). You have ran out of attempts, better luck next time!")
 				break
 		else:
-			#blanks at this point is a list of characters, so to prevent it being printed as an ugly list, which cannot be concatenated, we iterate through the list,
+			# blanks at this point is a list of characters, so to prevent it being printed as an ugly list, which cannot be concatenated, we iterate through the list,
 			# concatenating each element together individually into a word called merger which is then printed
 			merger = ""
 			for char in blanks:
@@ -80,7 +80,7 @@ def start_game ():
 	return None
 
 
-#function to repeat the game if the player wants to
+# function to repeat the game if the player wants to
 def play_again():
 	while True:
 		again = input("Would you like to play again? Y/N: ")
@@ -99,9 +99,9 @@ def play_again():
 soundfile_path = os.path.dirname(os.path.abspath(__file__)) + '\zeldas_lullaby_piano.wav'
 soundfile = soundfile_path.replace("\\","/")
 winsound.PlaySound(soundfile, winsound.SND_ASYNC + winsound.SND_LOOP) #SND_ASYNC allows other process to run cocurrently once the sound file starts. SND_LOOP will loop the song until the program is closed
-#TODO: Try detecting os, if windows, use winsound, if not windows, skip this part of code to prevent runtime errors when not on Windows machine
+# TODO: Try detecting os, if windows, use winsound, if not windows, skip this part of code to prevent runtime errors when not on Windows machine
 
-#main gameplay loop
+# main gameplay loop
 while True:
 	start_game()
 	if play_again() == True:
