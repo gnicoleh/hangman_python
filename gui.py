@@ -21,6 +21,7 @@ def openNewWindow():
     width = newWindow.winfo_screenwidth()
     height = newWindow.winfo_screenheight()
     newWindow.geometry("%dx%d" % (width, height))
+    newWindow.configure(bg="black")
 
     # a Label widget to show in toplevel
     Label(newWindow, text="This is the game window").pack()
