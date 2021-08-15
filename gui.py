@@ -3,7 +3,10 @@
 from tkinter import *
 #from tkinter import ttk
 import tkinter.font as font
-import webbrowser, winsound, os
+import webbrowser, os#, winsound
+#from playsound import playsound
+from pygame import mixer
+
 
 gamepageurl = "https://github.com/gnicoleh/hangman_python" # make repo "public" so it works for everyone
 def openweb():
@@ -27,8 +30,8 @@ def openNewWindow():
     Label(newWindow, text="This is the game window").pack()
 
 
-def SoundButtonOff(button):
-    button.image = volumeOffImage
+###def SoundButtonOff(button):
+    ###button.image = volumeOffImage
 
 def SoundButtonOn():
     pass
@@ -47,17 +50,17 @@ def DrawMainWindow():
     button3 = Button(mainWindow, bg="green", fg="white", font=myFont, text="Github Code", command= openweb).place(relx=0.5, rely=0.7, anchor=CENTER)
     button4 = Button(mainWindow, bg="green", fg="white", font=myFont, text="Quit", command= mainWindow.destroy).place(relx=0.5, rely=0.8, anchor=CENTER)
 
-    soundbutton = Button(mainWindow, image= volumeOnImage, height=50, width=50).place(relx=0.9, rely=0.9, anchor=CENTER)
+    ###soundbutton = Button(mainWindow, image= volumeOnImage, height=50, width=50).place(relx=0.9, rely=0.9, anchor=CENTER)
 
     mainWindow.mainloop()
 
-    
 
 def PlayGame():
     for widgets in mainWindow.winfo_children():
         widgets.destroy()
 
-    soundbutton = Button(mainWindow, image= volumeOnImage, height=50, width=50).place(relx=0.9, rely=0.9, anchor=CENTER)
+    ###soundbutton = Button(mainWindow, image= volumeOnImage, height=50, width=50).place(relx=0.9, rely=0.9, anchor=CENTER)
+
 
 def OpenSettings():
     for widgets in mainWindow.winfo_children():
@@ -65,8 +68,7 @@ def OpenSettings():
     
     titlebar = Label(mainWindow, bg="black", fg="green", text="SETTINGS", font=(myFont, 62, "bold")).place(relx=0.5, rely=0.2, anchor=CENTER)
     button1 = Button(mainWindow, bg="green", fg="white", font=myFont, text="Back", command=DrawMainWindow).place(relx=0.5, rely=0.5, anchor=CENTER)
-    soundbutton = Button(mainWindow, image= volumeOnImage, height=50, width=50).place(relx=0.9, rely=0.9, anchor=CENTER)
-
+    ###soundbutton = Button(mainWindow, image= volumeOnImage, height=50, width=50).place(relx=0.9, rely=0.9, anchor=CENTER)
 
 
 # Tk object which will be treated as a new window
@@ -80,18 +82,24 @@ mainWindow.configure(bg="black")
 
 myFont = font.Font(family="Segoe UI", size=30, weight="bold") # define font
 
-#plays the soundtrack
-soundfile_path = os.path.dirname(os.path.abspath(__file__)) + '\zeldas_lullaby_piano.wav'
-soundfile = soundfile_path.replace("\\","/")
-winsound.PlaySound(soundfile, winsound.SND_ASYNC + winsound.SND_LOOP) #SND_ASYNC allows other process to run cocurrently once the sound file starts. SND_LOOP will loop the song until the program is closed
+##plays the soundtrack
+#soundfile_path = os.path.dirname(os.path.abspath(__file__)) + '\zeldas_lullaby_piano.wav'
+#soundfile = soundfile_path.replace("\\","/")
+#winsound.PlaySound(soundfile, winsound.SND_ASYNC + winsound.SND_LOOP) #SND_ASYNC allows other process to run cocurrently once the sound file starts. SND_LOOP will loop the song until the program is closed
 
-folderpath = os.path.dirname(os.path.abspath(__file__))
-tempvolumeOnPath = folderpath + '\\volumeon.gif'
-tempvolumeOffPath = folderpath + '\\volumeoff.gif'
-volumeOnPath = tempvolumeOnPath.replace("\\","/")
-volumeOffPath = tempvolumeOffPath.replace("\\","/")
-volumeOnImage = PhotoImage(file= volumeOnPath)
-volumeOffImage = PhotoImage(file= volumeOffPath)
+# test soundtrack for any os
+mixer.init()
+mixer.music.load("zeldas_lullaby_piano.wav")
+mixer.music.play(-1)
+
+#folderpath = os.path.dirname(os.path.abspath(__file__))
+#tempvolumeOnPath = folderpath + '\\volumeon.gif'
+#tempvolumeOffPath = folderpath + '\\volumeoff.gif'
+#volumeOnPath = tempvolumeOnPath.replace("\\","/")
+#volumeOffPath = tempvolumeOffPath.replace("\\","/")
+#volumeOnImage = PhotoImage(file= volumeOnPath)
+#volumeOffImage = PhotoImage(file= volumeOffPath)
 
 while TRUE:
     DrawMainWindow()
+    
