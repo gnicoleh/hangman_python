@@ -2,11 +2,9 @@
 
 from tkinter import *
 import tkinter.font as font
-import webbrowser, os, platform #, winsound
+import webbrowser, os, platform, random
 from pygame import mixer
 
-def WhichSystem():
-    return platform.system()
 
 
 def SoundButtonOff(button):
@@ -33,18 +31,46 @@ def DrawMainWindow():
 
     mainWindow.mainloop()
 
+#GITHUB BUTTON SECTION
 gamepageurl = "https://github.com/gnicoleh/hangman_python" # make repo "public" so it works for everyone
 def OpenWeb():
     webbrowser.open(gamepageurl,1)
 
 
+
+#ACTUAL GAMEPLAY SECTION
+
+word_bank = ['chocolate', 'Horus Heresy', 'heretic', 'The God Emperor', 'Terraria', 'Siege', 'Beaulo', 'Dark Souls', 'cottoncandy', 'cryptocurrency', 'sparkpoint', 'PayMoneyWubby', 'SweetAnita']
+
+# Choosing a random word from a list
+def choose_word(word_bank):
+    return str(random.choice(word_bank)) #needed to ensure all outputs are strings for comparison
+
+# Creating blank spaces for each character in the chosen word
+def word_to_guess(word):
+    blank_spaces = []
+    for char in word:
+        if char != " ":
+            blank_spaces.append("_")
+        else:
+            blank_spaces.append(" ")
+    return blank_spaces
+
 def PlayGame():
     for widgets in mainWindow.winfo_children():
         widgets.destroy()
+    
+    #the body of the code to build the play space and perform game logic
+    word = choose_word(word_bank)
+    word = word.lower()
+    testarray = []
+    for char in word:
+        testarray.append("_")
 
-    soundbutton = Button(mainWindow, image= volumeOnImage, height=50, width=50).place(relx=0.9, rely=0.9, anchor=CENTER)
+    wordDisplay = Label(mainWindow, bg="black", fg="green", text= testarray, font=(myFont, 24, "bold")).place(relx=0.5, rely=0.5, anchor=CENTER)
 
 
+#SETTINGS SECTION
 def OpenSettings():
     for widgets in mainWindow.winfo_children():
         widgets.destroy()
@@ -52,6 +78,12 @@ def OpenSettings():
     titlebar = Label(mainWindow, bg="black", fg="green", text="SETTINGS", font=(myFont, 62, "bold")).place(relx=0.5, rely=0.2, anchor=CENTER)
     button1 = Button(mainWindow, bg="green", fg="white", font=myFont, text="Back", command=DrawMainWindow).place(relx=0.5, rely=0.5, anchor=CENTER)
     soundbutton = Button(mainWindow, image= volumeOnImage, height=50, width=50).place(relx=0.9, rely=0.9, anchor=CENTER)
+
+
+
+
+
+
 
 
 # Tk object which will be treated as a new window
@@ -71,9 +103,10 @@ myFont = font.Font(family="Segoe UI", size=30, weight="bold") # define font
 #winsound.PlaySound(soundfile, winsound.SND_ASYNC + winsound.SND_LOOP) #SND_ASYNC allows other process to run cocurrently once the sound file starts. SND_LOOP will loop the song until the program is closed
 
 # test soundtrack for any os, if it works on Windows, please remove code commented right above
-mixer.init()
-mixer.music.load("zeldas_lullaby_piano.wav")
-mixer.music.play(-1)
+#What is this DOESNT work on Windows?
+# mixer.init()
+# mixer.music.load("zeldas_lullaby_piano.wav")
+# mixer.music.play(-1)
 
 folderpath = os.path.dirname(os.path.abspath(__file__))
 tempVolumeOnPath = folderpath + '\\volumeon.gif'
