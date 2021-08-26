@@ -1,7 +1,8 @@
 ## GUI FOR HANGMAN
 
 from tkinter import *
-import tkinter as tk
+from tkinter import ttk
+#import tkinter as tk
 import tkinter.font as font
 import webbrowser, os, platform, random
 from pygame import mixer
@@ -67,8 +68,8 @@ def PlayGame():
     blanks = word_to_guess(word)
     attempts = 6
 
-    wordDisplay = Label(mainWindow, bg="black", fg="green", text=blanks, font=(myFont, 42, "bold")).place(relx=0.5, rely=0.5, anchor=CENTER)
-    #mainWindow.wordDisplay = Label(mainWindow, bg="black", fg="green", text= blanks, font=(myFont, 42, "bold")).place(relx=0.5, rely=0.5, anchor=CENTER)
+    wordDisplay = Label(mainWindow, bg="black", fg="green", text=blanks, font=(myFont, 42, "bold"))
+    wordDisplay.place(relx=0.5, rely=0.5, anchor=CENTER) # using .place in its own line prevents object "wordDisplay" becoming type None
     while True:
         if "_" in blanks:
             given_letter = input("Please enter a character that you think is in the word(s)\n")
@@ -88,12 +89,7 @@ def PlayGame():
                         position_of_letter = word.find(given_letter, i) # looks if letter appears more than once in the word
                         i = position_of_letter + 1 # starts find() on the next index of the last appearance
                         blanks[position_of_letter] = given_letter
-                #wordDisplay = Label(mainWindow, bg="black", fg="green", text= blanks, font=(myFont, 42, "bold")).place(relx=0.5, rely=0.5, anchor=CENTER)
-                #text = tk.StringVar()
-                #text.set(blanks)
-                #wordDisplay = tk.Label(mainWindow, bg="black", fg="green", textvariable=text, font=(myFont, 42, "bold")).place(relx=0.5, rely=0.5, anchor=CENTER)
-                wordDisplay['text'] = str(blanks)
-                ##FIX THIS PART
+                wordDisplay.config(text=blanks)
                 
 
 
